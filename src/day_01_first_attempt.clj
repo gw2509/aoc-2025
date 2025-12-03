@@ -55,7 +55,7 @@
          [50])))
 
 (defn solve []
-  (->> (rotate (read-file "resources/test-input.txt"))
+  (->> (rotate (read-file "resources/day01/test-input.txt"))
        (filter zero?)
        count))
 

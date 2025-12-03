@@ -32,10 +32,6 @@
          [50 0])))
 
 (defn solve []
-  (->> (rotate (read-file "resources/input.txt"))
+  (->> (rotate (read-file "resources/day01/input.txt"))
        last))
 
-
-;; 3130 x
-;; 2702 x
-;; 6554 pass
