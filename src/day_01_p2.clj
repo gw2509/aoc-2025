@@ -10,6 +10,10 @@
         num (parse-long (apply str (rest r)))]
     (if (= dir \L) (- num) num)))
 
+(defn n-cycles
+  [pos]
+  (abs (quot pos 100)))
+
 (defn rotate
   [input]
   (->> input
@@ -21,9 +25,9 @@
                          [new-pos (+ n-visits (cond
                                                 (zero? pos) 1
                                                 (neg? pos) (if (> cur-pos 0)
-                                                             (inc (abs (quot pos 100)))
-                                                             (abs (quot pos 100)))
-                                                :default (abs (quot pos 100))))]))
+                                                             (inc (n-cycles pos))
+                                                             (n-cycles pos))
+                                                :default (n-cycles pos)))]))
 
          [50 0])))
 
