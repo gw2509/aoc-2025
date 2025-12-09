@@ -1,4 +1,4 @@
-(ns day-01-tests
+(ns day-02-tests
   (:require [clojure.test :refer [deftest testing is]]
             [day-02-p1 :refer [invalid-id? solve]]))
 
