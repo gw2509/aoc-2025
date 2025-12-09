@@ -1,11 +1,6 @@
-(ns day-02-tests
+(ns day-01-tests
   (:require [clojure.test :refer [deftest testing is]]
             [day-02-p1 :refer [invalid-id? solve]]))
-
-;; You can find the invalid IDs by looking for any ID which is
-;; made only of some sequence of digits repeated TWICE.
-;; So, 55 (5 twice), 6464 (64 twice), and 123123 (123 twice)
-;; would all be invalid IDs.
 
 (deftest invalid_id_test_1
   (testing "check against example invalid input"
