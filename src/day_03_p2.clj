@@ -13,25 +13,29 @@
   (map char->int s))
 
 (defn max-batteries-p2
+  "Greedy stack-based method"
   [bank]
   (let [digits (string->digits bank)
         n (count digits)
-        k 12
-        to-drop (- n k)]
-    (if (neg? to-drop)
-      (parse-long bank)
-      (loop [remaining digits
-             stack []
-             drops-left to-drop]
-        (prn stack)
-        (if (empty? remaining)
-          (parse-long (apply str (take k stack)))
-          (let [digit (first remaining)]
-            (if (and (pos? drops-left)
-                     (seq stack)
-                     (> digit (peek stack)))
-              (recur remaining (pop stack) (dec drops-left))
-              (recur (rest remaining) (conj stack digit) drops-left))))))))
+        len 12
+        n-excess (- n len)]
+    (loop [remaining digits
+           kept-digits-stack []
+           drops-left n-excess]
+      (if (empty? remaining)
+        (let [joltage (parse-long (apply str (take len kept-digits-stack)))]
+          joltage)
+        (let [digit (first remaining)]                      ; otherwise consider remaining digits
+          (prn kept-digits-stack digit drops-left)
+          (if (and (pos? drops-left)
+                   (seq kept-digits-stack)
+                   (> digit (peek kept-digits-stack)))
+            (recur remaining                                ; don't keep digit
+                   (pop kept-digits-stack)
+                   (dec drops-left))
+            (recur (rest remaining)                         ; keep digit
+                   (conj kept-digits-stack digit)
+                   drops-left)))))))
 
 (defn solve [filename]
   (->> (read-file filename)
