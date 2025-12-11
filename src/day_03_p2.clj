@@ -14,25 +14,6 @@
 
 (defn max-batteries-p2
   [bank]
-  (let [digits (reverse (string->digits bank))]
-    (loop [the-digits digits
-           cnt (count digits)
-           joltage '()]
-      (let [candidate (first the-digits)
-            remaining-digits (rest the-digits)
-            max-r (apply max (or (seq remaining-digits) '(0)))]
-        (prn cnt candidate remaining-digits joltage)
-        (if (> cnt 0)
-          (recur remaining-digits (dec cnt)
-                 (if (or
-                       (or (< cnt 12) (> candidate max-r))
-                       (or (<= cnt 12) (> candidate max-r)))
-                   (cons candidate joltage)
-                   joltage))
-          (parse-long (apply str joltage)))))))
-
-(defn max-batteries-p2
-  [bank]
   (let [digits (string->digits bank)
         n (count digits)
         k 12
